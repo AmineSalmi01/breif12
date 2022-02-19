@@ -1,10 +1,10 @@
 <?php 
-include "connect.php";
-$matr = $_GET['matr'];
-$photo = $_GET['pic'];
-$sql_select = "SELECT * FROM employe WHERE matricule ='$matr'";
-$result = $conn->query($sql_select);
-$row = $result->fetch_array(MYSQLI_ASSOC);
+  include "connect.php";
+  $matr = $_GET['matr'];
+  $photo = $_GET['pic'];
+  $sql_select = "SELECT * FROM employe WHERE matricule ='$matr'"; 
+  $result = $conn->query($sql_select);
+  $row = $result->fetch_array(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -62,21 +62,18 @@ if (isset($_POST['edit'])) {
     $file = "photos/" . $photoname;
       
     // update records 
-    $update_sql =  " UPDATE employe
-        SET nom='$nom', prénom='$prénom', date='$date', département='$département', salaire='$salaire', fonction='$salaire', photo='$photoname'
+    $update_sql =  "UPDATE employe
+        SET nom='$nom', prénom='$prénom', date='$date', département='$département', salaire=$salaire, fonction='$fonction', photo='$photoname'
          WHERE matricule='$matr'";
         echo $update_sql;
 
     // move photo to folder
-    if(move_uploaded_file($temp_name, $file)){
-      $mssg = "yes";
-    }
-    else{
-      $mssg = "no";
-    }
+    move_uploaded_file($temp_name, $file);
+    
     // excute query 
     if (mysqli_query($conn, $update_sql)) {
         echo "New line has been added";
+        header("location: index.php");
     } else {
         echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }

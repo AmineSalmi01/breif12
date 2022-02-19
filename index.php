@@ -24,7 +24,7 @@ include "connect.php";
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="search.html">Search</a>
           </li>
           <li class="nav-item dropdown">
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -129,7 +129,8 @@ include "connect.php";
             }
           }
           // show records from database in table 
-          $SQL = "SELECT * FROM employe;";
+          
+            $SQL = "SELECT * FROM employe;";
             $result = mysqli_query($conn, $SQL);
             $resultCheck = mysqli_num_rows($result);
             if($resultCheck > 0){
@@ -142,7 +143,7 @@ include "connect.php";
                 <td>".$row["département"]."</td>
                 <td>".$row["salaire"]."</td>
                 <td>".$row["fonction"]."</td>
-                <td> <img src=/photos/" . $row["photo"]. "></td>
+                <td> <img src='photos/" . $row["photo"]. "'></td>
                 <td><a href='index.php?matr=$row[matricule]' onClick=\"return confirm('are you sure you want to delete this record ?')\"><img class='icone' src='trash.png'></a>
                     <a href='edit.php?matr=$row[matricule]& pic=$row[photo]'> <img class='icone' src='editing.png'></a>
 
@@ -153,6 +154,7 @@ include "connect.php";
                   
               }
             }
+          
           ?>
         </table>
 </body>
